@@ -8,7 +8,7 @@ SRCREV_meta ?= "${AUTOREV}"
 
 EXTRASRCINTL = ""
 EXTRASRCINTL_intel-corei7-64 = " \
-            file://rt-mm-larger-stack-guard-gap-between-vmas-FAKE.patch \
+            file://rt-mm-larger-stack-guard-gap-between-vmas.patch \
 "
 
 SRC_URI += "${EXTRASRCINTL}"
