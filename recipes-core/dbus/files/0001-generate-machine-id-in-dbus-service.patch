@@ -1,0 +1,28 @@
+From b40885e6945d703877d65e9a5602f4e9856c0766 Mon Sep 17 00:00:00 2001
+From: Guojian Zhou <guojian.zhou@windriver.com>
+Date: Tue, 28 Nov 2017 07:18:23 +0000
+Subject: [PATCH] Generate dbus machine id in dbus systemd service
+
+Use command 'dbus-uuidgen --ensure' to generate machine id in
+/var/lib/dbus/machine-id
+
+Signed-off-by: De Huo <De.Huo@windriver.com>
+---
+ bus/dbus.service.in | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/bus/dbus.service.in b/bus/dbus.service.in
+index 3bc4726..8cf52d5 100644
+--- a/bus/dbus.service.in
++++ b/bus/dbus.service.in
+@@ -4,6 +4,7 @@ Documentation=man:dbus-daemon(1)
+ Requires=dbus.socket
+ 
+ [Service]
++ExecStartPre=@EXPANDED_BINDIR@/dbus-uuidgen --ensure
+ ExecStart=@EXPANDED_BINDIR@/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+ ExecReload=@EXPANDED_BINDIR@/dbus-send --print-reply --system --type=method_call --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig
+ OOMScoreAdjust=-900
+-- 
+2.7.4
+
