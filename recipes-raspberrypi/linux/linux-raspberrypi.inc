@@ -139,6 +139,10 @@ do_configure_prepend() {
     # this module is built externally via drbd-utils
     kernel_configure_variable BLK_DEV_DRBD n
 
+    # Active BTRFS and IKCONFIG for OverC
+    kernel_configure_variable BTRFS_FS y
+    kernel_configure_variable IKCONFIG y
+
     # Activate the configuration options for VC4
     VC4GRAPHICS="${@bb.utils.contains("MACHINE_FEATURES", "vc4graphics", "1", "0", d)}"
     if [ ${VC4GRAPHICS} = "1" ]; then
